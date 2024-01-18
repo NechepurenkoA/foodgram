@@ -1,0 +1,49 @@
+version: '3.8'
+name: foodgram_dev
+
+volumes:
+  static:
+  media:
+  pg_data:
+
+services:
+
+
+  frontend:
+    image: encodedb/foodgram_frontend
+    volumes:
+      - ../frontend/:/app/result_build/
+
+  db:
+    image: postgres:13
+    restart: always
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+  backend:
+    image: encodedb/foodgram_backend
+    restart:
+      always
+    volumes:
+      - static:/app/static
+      - media:/app/media
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.19.3
+    ports:
+      - "9090:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/build:/usr/share/nginx/html/
+      - ../docs/:/usr/share/nginx/html/api/docs/
+      - static:/var/html/static/
+      - media:/var/html/media/
+    depends_on:
+      - frontend
+      - backend
