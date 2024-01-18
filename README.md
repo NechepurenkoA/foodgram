@@ -91,21 +91,7 @@ sudo docker compose -f docker-compose.yml exec backend python manage.py createsu
 ```
 После этого вас попросят ввести `Username`, `Email`, `Password` и вот ваша админка готова.
 
-
-## Наслаждайтесь!
-
-# P.S
-## Пример рабочего сайта доступен по адресу:
-### https://batiskaf-foodgram.hopto.org/
-
 **Используемые технологии:**
 
 Java Script, Python 3.9, Django REST, Django.
-
-## Reviewer Info (will be deleted)
-
-**Вход в админку**
-
-**username**: admin \
-**password**: admin
 
